@@ -33,6 +33,6 @@ public class MaterialsDto {
     @NotNull
     private int remainingSpools;
     @NotNull
-    private boolean measurements;
+    private boolean isMeasurementsRequired;
     private int initialWeight;
 }

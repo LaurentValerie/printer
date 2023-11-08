@@ -24,7 +24,7 @@ public class Materials{
     private BigDecimal remaining;
     private String spoolName;
     private int remainingSpools;
-    private boolean measurements;
+    private boolean isMeasurementsRequired;
     private int initialWeight;
 
 }

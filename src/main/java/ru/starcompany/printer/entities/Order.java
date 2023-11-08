@@ -13,7 +13,7 @@ public class Order {
     private long executorId;
     private String name;
     private int quantity;
-    private String plasticType;
-    private String plasticColor;
+    private PlasticType plasticType;
+    private PlasticColour plasticColour;
 
 }

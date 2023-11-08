@@ -10,6 +10,7 @@ import ru.starcompany.printer.mappers.ClientMapper;
 public class ClientService {
     private final ClientMapper clientMapper;
     private final ClientPersistenceService clientPersistenceService;
+
     public ClientDto postClient(ClientDto clientDto){
         return clientPersistenceService.saveClient(clientMapper.toClient(clientDto));
     }

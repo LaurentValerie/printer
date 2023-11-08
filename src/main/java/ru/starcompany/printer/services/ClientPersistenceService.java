@@ -12,6 +12,7 @@ import ru.starcompany.printer.repositories.ClientRepository;
 public class ClientPersistenceService {
     private final ClientRepository clientRepository;
     private final ClientDtoMapper clientDtoMapper;
+
     public ClientDto saveClient(Client client){
         return clientDtoMapper.toClientDto(clientRepository.save(client));
     }

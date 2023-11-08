@@ -1,6 +1,8 @@
 package ru.starcompany.printer.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,8 +17,9 @@ public class OrderController {
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
+
     @PostMapping("/order/new")
-    public ResponseEntity<Long> postOrder(@RequestBody OrderDto orderDto){
+    public ResponseEntity<Long> postOrder(@Valid OrderDto orderDto){
         orderService.postOrder(orderDto);
         return ResponseEntity.ok().body(orderDto.getId());
     }
