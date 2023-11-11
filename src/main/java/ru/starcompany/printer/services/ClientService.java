@@ -2,6 +2,7 @@ package ru.starcompany.printer.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.starcompany.printer.entities.Client;
 import ru.starcompany.printer.entities.ClientDto;
 import ru.starcompany.printer.mappers.ClientMapper;
 
@@ -12,6 +13,7 @@ public class ClientService {
     private final ClientPersistenceService clientPersistenceService;
 
     public ClientDto postClient(ClientDto clientDto){
-        return clientPersistenceService.saveClient(clientMapper.toClient(clientDto));
+        Client client=clientMapper.toClient(clientDto);
+        return clientPersistenceService.saveClient(client);
     }
 }
