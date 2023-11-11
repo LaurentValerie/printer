@@ -18,9 +18,9 @@ public class OrderDto {
     @NotNull
     private int quantity;
     @NotNull
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private PlasticType plasticType;
     @NotNull
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private PlasticColour plasticColour;
 }

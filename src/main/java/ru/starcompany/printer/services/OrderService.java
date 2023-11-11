@@ -14,8 +14,8 @@ public class OrderService {
     private final WebClientController controller;
 
     public OrderDto postOrder(OrderDto orderDto){
-        OrderDto orderDto1 = orderPersistenceService.saveOrder(orderMapper.toOrder(orderDto));
+        OrderDto savedOrder = orderPersistenceService.saveOrder(orderMapper.toOrder(orderDto));
         controller.sendToExecutor(orderDto);
-        return orderDto1;
+        return savedOrder;
     }
 }

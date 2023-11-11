@@ -19,8 +19,8 @@ public class OrderController {
     }
 
     @PostMapping("/order/new")
-    public ResponseEntity<Long> postOrder(@Valid OrderDto orderDto){
-        orderService.postOrder(orderDto);
-        return ResponseEntity.ok().body(orderDto.getId());
+    public ResponseEntity<Long> postOrder(@RequestBody @Valid OrderDto orderDto){
+        OrderDto savedOrder = orderService.postOrder(orderDto);
+        return ResponseEntity.ok().body(savedOrder.getId());
     }
 }
