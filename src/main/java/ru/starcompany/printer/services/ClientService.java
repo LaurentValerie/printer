@@ -13,7 +13,7 @@ public class ClientService {
     private final ClientPersistenceService clientPersistenceService;
 
     public ClientDto postClient(ClientDto clientDto){
-        Client client=clientMapper.toClient(clientDto);
+        Client client = clientMapper.toClient(clientDto);
         return clientPersistenceService.saveClient(client);
     }
 }
