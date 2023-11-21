@@ -1,9 +1,9 @@
 spring:
     datasource:
-        url: jdbc:postgresql://${POSTGRES_SERVER:dummy}:${POSTGRES_PORT:dummy}/${POSTGRES_DB:dummy}
+        url: jdbc:postgresql://localhost:5435/printer
         driver-class-name: org.postgresql.Driver
-        username: ${POSTGRES_USER:dummy}
-        password: ${POSTGRES_PASSWORD:dummy}
+        username: postgres
+        password: postgres
     jpa:
         database: postgresql
         show-sql: false
