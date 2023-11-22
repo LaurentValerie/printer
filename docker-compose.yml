@@ -4,7 +4,7 @@ services:
     hostname: printer_db
     image: postgres:15.2-alpine
     ports:
-      - "5432:5432"
+      - "5434:5432"
     healthcheck: # Проверка, что база поднялась
       test: "pg_isready --username=$POSTGRES_USER && PGPASSWORD=$POSTGRES_PASSWORD psql --username=$POSTGRES_USER --dbname=$POSTGRES_DB --list"
       timeout: 5s
