@@ -1,0 +1,33 @@
+version: '3.1'
+services:
+  postgresql: # сервис БД
+    hostname: printer_db
+    image: postgres:15.2-alpine
+    ports:
+      - "5434:5432"
+    healthcheck: # Проверка, что база поднялась
+      test: "pg_isready --username=$POSTGRES_USER && PGPASSWORD=$POSTGRES_PASSWORD psql --username=$POSTGRES_USER --dbname=$POSTGRES_DB --list"
+      timeout: 5s
+      retries: 10
+    env_file:
+      - .env                # путь до файла с указанием переменных окружения
+    networks:
+      - enrollment
+
+  printer: # приложение
+    build: .
+    hostname: printer
+    env_file:
+      - .env              # путь до файла с указанием переменных окружения
+    restart: "always"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    networks:
+      - enrollment
+
+networks:
+  enrollment:
+    driver: bridge
