@@ -1,6 +1,6 @@
 version: '3.1'
 services:
-  postgresql: # сервис БД
+  printer_db: # сервис БД
     hostname: printer_db
     image: postgres:15.2-alpine
     ports:
@@ -12,7 +12,7 @@ services:
     env_file:
       - .env                # путь до файла с указанием переменных окружения
     networks:
-      - enrollment
+      - printer_inner
 
   printer: # приложение
     build: .
@@ -23,11 +23,11 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      postgresql:
+      printer_db:
         condition: service_healthy
     networks:
-      - enrollment
+      - printer_inner
 
 networks:
-  enrollment:
+  printer_inner:
     driver: bridge
