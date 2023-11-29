@@ -16,6 +16,7 @@ public class OrderService {
     public OrderDto postOrder(OrderDto orderDto){
         OrderDto savedOrder = orderPersistenceService.saveOrder(orderMapper.toOrder(orderDto));
         controller.sendToExecutor(orderDto);
+        orderDto.getPlasticColour().name();
         return savedOrder;
     }
 }
