@@ -1,30 +1,40 @@
 package ru.starcompany.printer.entities;
 
-import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 import java.math.BigDecimal;
-
-@NoArgsConstructor
-@Entity
-@Table(name = "materials")
-public class Materials{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+@Data
+public class MaterialDto {
     private long id;
-    private String materialName;
+    @NotEmpty
+    private String materialType;
+    @NotEmpty
+    private String materialColour;
+    @NotNull
     private int spools;
+    @NotNull
     private BigDecimal priceOriginal;
+    @NotNull
     private BigDecimal currentPrice;
+    @NotNull
     private BigDecimal weight;
+    @NotNull
     private BigDecimal density;
+    @NotNull
     private BigDecimal pricePerKgOriginal;
+    @NotNull
     private BigDecimal pricePerKgCurrent;
+    @NotNull
     private BigDecimal total;
+    @NotNull
     private BigDecimal remaining;
+    @NotEmpty
     private String spoolName;
+    @NotNull
     private int remainingSpools;
+    @NotNull
     private boolean isMeasurementsRequired;
     private int initialWeight;
-
 }
