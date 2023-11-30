@@ -19,7 +19,7 @@ public class MaterialService {
 
     public MaterialDto postMaterials(MaterialDto materialDto){
         Material material = materialMapper.toMaterials(materialDto);
-        return materialPersistenceService.saveMaterials(material);
+        return materialDtoMapper.toMaterialsDto(materialPersistenceService.saveMaterials(material));
     }
     public Set<String> getAllMaterialTypes(){
         return materialPersistenceService.getAllMaterials().stream()
