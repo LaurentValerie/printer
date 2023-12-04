@@ -1,4 +1,4 @@
-package ru.starcompany.printer.entities;
+package ru.starcompany.printer.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

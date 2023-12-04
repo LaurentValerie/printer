@@ -3,7 +3,6 @@ package ru.starcompany.printer.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.starcompany.printer.entities.Material;
-import ru.starcompany.printer.entities.MaterialDto;
 import ru.starcompany.printer.mappers.MaterialDtoMapper;
 import ru.starcompany.printer.repositories.MaterialRepository;
 

@@ -1,20 +1,22 @@
 package ru.starcompany.printer.services;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.starcompany.printer.entities.Client;
-import ru.starcompany.printer.entities.ClientDto;
-import ru.starcompany.printer.mappers.ClientDtoMapper;
 import ru.starcompany.printer.repositories.ClientRepository;
 
-@RequiredArgsConstructor
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class ClientPersistenceService {
     private final ClientRepository clientRepository;
-    private final ClientDtoMapper clientDtoMapper;
 
-    public ClientDto saveClient(Client client){
-        return clientDtoMapper.toClientDto(clientRepository.save(client));
+    public Client saveClient(Client client){
+        if (clientRepository.existsById(client.getUuid())) {
+            log.info("Client: {} already exists", client.getUuid());
+        }
+        return clientRepository.save(client);
     }
 
 }

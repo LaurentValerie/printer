@@ -2,7 +2,7 @@ package ru.starcompany.printer.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.starcompany.printer.entities.OrderDto;
+import ru.starcompany.printer.dto.OrderDto;
 import ru.starcompany.printer.mappers.OrderMapper;
 import ru.starcompany.printer.controllers.WebClientController;
 
@@ -15,7 +15,8 @@ public class OrderService {
 
     public OrderDto postOrder(OrderDto orderDto){
         OrderDto savedOrder = orderPersistenceService.saveOrder(orderMapper.toOrder(orderDto));
-        controller.sendToExecutor(orderDto);
+        // TODO fix after complete front end
+//        controller.sendToExecutor(orderDto);
         return savedOrder;
     }
 }

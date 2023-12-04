@@ -13,11 +13,10 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private long clientId;
+    private String clientUuid;
     private long executorId;
-    private String name;
     private int quantity;
-    private PlasticType plasticType;
-    private PlasticColour plasticColour;
-
+    private String plasticType;
+    private String plasticColour;
+    private String information;
 }

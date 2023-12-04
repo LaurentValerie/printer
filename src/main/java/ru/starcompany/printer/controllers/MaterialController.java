@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.starcompany.printer.entities.MaterialDto;
+import ru.starcompany.printer.dto.MaterialDto;
 import ru.starcompany.printer.services.MaterialService;
 
 import java.util.Set;
