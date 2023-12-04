@@ -2,11 +2,11 @@ package ru.starcompany.printer.controllers;
 
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import ru.starcompany.printer.entities.OrderDto;
+import ru.starcompany.printer.dto.OrderDto;
 
 @org.springframework.stereotype.Controller
 public class WebClientController {
-    WebClient webClient = WebClient.create("http://localhost:8080");
+    WebClient webClient = WebClient.create("http://localhost:8090");
 
     public Mono<OrderDto> sendToExecutor(final OrderDto orderDto) {
         Mono<OrderDto> postMono = Mono.just(orderDto);

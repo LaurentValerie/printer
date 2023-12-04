@@ -1,4 +1,4 @@
-package ru.starcompany.printer.entities;
+package ru.starcompany.printer.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -9,9 +9,8 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class ClientDto {
-    private long id;
-    @NotEmpty
-    private String name;
     @NotEmpty
     private String telegram;
+    @NotEmpty
+    private String name;
 }

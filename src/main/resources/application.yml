@@ -1,6 +1,6 @@
 spring:
     datasource:
-        url: jdbc:postgresql://${POSTGRES_DB:dummy}:${POSTGRES_PORT:dummy}/${POSTGRES_DB:dummy}
+        url: jdbc:postgresql://printer_db:${POSTGRES_PORT:dummy}/${POSTGRES_DB:dummy}
         driver-class-name: org.postgresql.Driver
         username: ${POSTGRES_USER:dummy}
         password: ${POSTGRES_PASSWORD:dummy}
@@ -9,6 +9,7 @@ spring:
         show-sql: false
         hibernate:
             ddl-auto: update
+        open-in-view: false
 
 management:
     endpoint:

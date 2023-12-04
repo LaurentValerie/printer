@@ -10,7 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import ru.starcompany.printer.PrinterApplicationTests;
 import ru.starcompany.printer.entities.Client;
-import ru.starcompany.printer.entities.ClientDto;
+import ru.starcompany.printer.dto.ClientDto;
 import ru.starcompany.printer.repositories.ClientRepository;
 
 import java.util.List;
@@ -53,6 +53,36 @@ class ClientControllerIntegrationTest extends PrinterApplicationTests {
         assertClients(clientDto, clients.get(0));
     }
 
+    @Test
+    @DisplayName("POST /client/new обновление клиента")
+    public void successfullyUpdateClientTest() throws Exception {
+        // given
+        Client existingClient = createClient();
+        ClientDto updatedClient = createClientDto();
+        updatedClient.setName("NOT_SALLICH");
+
+        // when
+        ResultActions resultActions = mockMvc.perform(post("/client/new")
+                        .content(mapper.writeValueAsString(updatedClient))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print());
+
+        // then
+        resultActions.andExpect(status().isOk());
+
+        List<Client> clients = clientRepository.findAll();
+        assertEquals(1, clients.size(), "Must be only one client");
+        assertEquals(updatedClient.getName(), clients.get(0).getName(), "Name must be updated");
+    }
+
+
+    private Client createClient() {
+        Client client = new Client();
+        client.setUuid("TEST_SALLICH");
+        client.setName("TEST_REGINA");
+        return clientRepository.save(client);
+    }
+
     private ClientDto createClientDto() {
         return ClientDto.builder()
                 .name("TEST_REGINA")
@@ -61,7 +91,7 @@ class ClientControllerIntegrationTest extends PrinterApplicationTests {
     }
 
     private void assertClients(ClientDto clientDto, Client client) {
+        assertEquals(clientDto.getTelegram(), client.getUuid());
         assertEquals(clientDto.getName(), client.getName());
-        assertEquals(clientDto.getTelegram(), client.getTelegram());
     }
 }
