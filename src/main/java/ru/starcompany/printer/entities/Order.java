@@ -14,8 +14,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String clientUuid;
-    private long executorId;
-    private int quantity;
+    private String executorUuid;
+    private Integer quantity;
     private String plasticType;
     private String plasticColour;
     private String information;

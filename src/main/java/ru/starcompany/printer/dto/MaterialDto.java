@@ -13,7 +13,7 @@ public class MaterialDto {
     @NotEmpty
     private String materialColour;
     @NotNull
-    private int spools;
+    private Integer spools;
     @NotNull
     private BigDecimal priceOriginal;
     @NotNull
@@ -33,7 +33,7 @@ public class MaterialDto {
     @NotEmpty
     private String spoolName;
     @NotNull
-    private int remainingSpools;
+    private Integer remainingSpools;
     @NotNull
     private boolean isMeasurementsRequired;
     private int initialWeight;

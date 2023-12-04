@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class OrderDto {
     private long id;
-    @NotNull
-    private Long clientUuid;
     @NotEmpty
-    private String executorId;
+    private String clientUuid;
+    @NotEmpty
+    private String executorUuid;
     @NotNull
     private Integer quantity;
     @NotEmpty
