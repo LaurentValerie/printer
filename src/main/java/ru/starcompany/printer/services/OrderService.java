@@ -11,12 +11,12 @@ import ru.starcompany.printer.controllers.WebClientController;
 public class OrderService {
     private final OrderMapper orderMapper;
     private final OrderPersistenceService orderPersistenceService;
-    private final WebClientController controller;
+    private final WebClientController webClientController;
 
     public OrderDto postOrder(OrderDto orderDto){
         OrderDto savedOrder = orderPersistenceService.saveOrder(orderMapper.toOrder(orderDto));
         // TODO fix after complete front end
-//        controller.sendToExecutor(orderDto);
+//        webClientController.sendToExecutor(orderDto);
         return savedOrder;
     }
 }
