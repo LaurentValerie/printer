@@ -13,7 +13,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "clients")
 public class Client {
-    //add phone
+    //TODO add phone
     @Id
     private String uuid;
     private String name;

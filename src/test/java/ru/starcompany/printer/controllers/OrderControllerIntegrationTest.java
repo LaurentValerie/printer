@@ -28,6 +28,7 @@ public class OrderControllerIntegrationTest extends PrinterApplicationTests {
 
     @Autowired
     private MockMvc mockMvc;
+
     @Autowired
     private ObjectMapper mapper;
     @Test

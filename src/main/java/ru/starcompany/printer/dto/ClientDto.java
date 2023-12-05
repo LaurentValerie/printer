@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 @Builder
-@AllArgsConstructor
 public class ClientDto {
     @NotEmpty
     private String telegram;

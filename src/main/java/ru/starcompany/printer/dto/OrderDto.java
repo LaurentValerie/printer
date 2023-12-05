@@ -8,7 +8,6 @@ import lombok.Data;
 
 @Data
 @Builder
-@AllArgsConstructor
 public class OrderDto {
     private long id;
     @NotEmpty
