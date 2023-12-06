@@ -58,9 +58,11 @@ class ClientControllerIntegrationTest extends PrinterApplicationTests {
     @DisplayName("POST /client/new обновление клиента")
     public void successfullyUpdateClientTest() throws Exception {
         // given
-        Client existingClient = createClient();
+        createAndSaveClient();
+
+        String clientNumber = "+78005553535";
         ClientDto updatedClient = createClientDto();
-        updatedClient.setName("NOT_SALLICH");
+        updatedClient.setPhone(clientNumber);
 
         // when
         ResultActions resultActions = mockMvc.perform(post("/client/new")
@@ -73,11 +75,11 @@ class ClientControllerIntegrationTest extends PrinterApplicationTests {
 
         List<Client> clients = clientRepository.findAll();
         assertEquals(1, clients.size(), "Must be only one client");
-        assertEquals(updatedClient.getName(), clients.get(0).getName(), "Name must be updated");
+        assertEquals(updatedClient.getPhone(), clients.get(0).getPhone(), "Name must be updated");
     }
 
 
-    private Client createClient() {
+    private Client createAndSaveClient() {
         Client client = new Client();
         client.setUuid("TEST_SALLICH");
         client.setName("TEST_REGINA");
