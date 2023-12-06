@@ -24,7 +24,6 @@ public class MaterialService {
     }
     public Set<MaterialTypeDto> getAllMaterialTypes(){
         return materialPersistenceService.getAllMaterials().stream()
-                .distinct()
                 .map(this::getMaterialTypeDto)
                 .collect(Collectors.toSet());
     }
