@@ -9,8 +9,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.starcompany.printer.dto.ClientDto;
 import ru.starcompany.printer.entities.Client;
-import ru.starcompany.printer.mappers.ClientDtoMapper;
-import ru.starcompany.printer.mappers.ClientMapper;
+import ru.starcompany.printer.mappers.Client2ClientDtoMapper;
+import ru.starcompany.printer.mappers.ClientDto2ClientMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
@@ -24,8 +24,8 @@ class ClientServiceTest {
 
     @BeforeEach
     void setUp() {
-        var clientMapper = Mappers.getMapper(ClientMapper.class);
-        var clientDtoMapper = Mappers.getMapper(ClientDtoMapper.class);
+        var clientMapper = Mappers.getMapper(Client2ClientDtoMapper.class);
+        var clientDtoMapper = Mappers.getMapper(ClientDto2ClientMapper.class);
         clientService = new ClientService(clientMapper, clientDtoMapper, clientPersistenceService);
     }
 
