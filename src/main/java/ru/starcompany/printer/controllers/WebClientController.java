@@ -1,10 +1,11 @@
 package ru.starcompany.printer.controllers;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import ru.starcompany.printer.dto.OrderDto;
 
-@org.springframework.stereotype.Controller
+@Controller
 public class WebClientController {
     WebClient webClient = WebClient.create("http://localhost:8090");
 

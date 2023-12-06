@@ -32,13 +32,13 @@ public class OrderControllerIntegrationTest extends PrinterApplicationTests {
     @Autowired
     private ObjectMapper mapper;
     @Test
-    @DisplayName("POST /order/new создание заказа")
+    @DisplayName("POST api/order/new создание заказа")
     public void successfullyCreateOrderTest() throws Exception {
         // given
         OrderDto orderDto = createOrderDto();
 
         // when
-        ResultActions resultActions = mockMvc.perform(post("/order/new")
+        ResultActions resultActions = mockMvc.perform(post("/api/order/new")
                         .content(mapper.writeValueAsString(orderDto))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print());

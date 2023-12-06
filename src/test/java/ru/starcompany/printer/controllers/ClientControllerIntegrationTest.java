@@ -35,13 +35,13 @@ class ClientControllerIntegrationTest extends PrinterApplicationTests {
 
 
     @Test
-    @DisplayName("POST /client/new создание клиента")
+    @DisplayName("POST api/client/new создание клиента")
     public void successfullyCreateClientTest() throws Exception {
         // given
         ClientDto clientDto = createClientDto();
 
         // when
-        ResultActions resultActions = mockMvc.perform(post("/client/new")
+        ResultActions resultActions = mockMvc.perform(post("/api/client/new")
                         .content(mapper.writeValueAsString(clientDto))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print());
@@ -55,7 +55,7 @@ class ClientControllerIntegrationTest extends PrinterApplicationTests {
     }
 
     @Test
-    @DisplayName("POST /client/new обновление клиента")
+    @DisplayName("POST api/client/new обновление клиента")
     public void successfullyUpdateClientTest() throws Exception {
         // given
         createAndSaveClient();
@@ -65,7 +65,7 @@ class ClientControllerIntegrationTest extends PrinterApplicationTests {
         updatedClient.setPhone(clientNumber);
 
         // when
-        ResultActions resultActions = mockMvc.perform(post("/client/new")
+        ResultActions resultActions = mockMvc.perform(post("/api/client/new")
                         .content(mapper.writeValueAsString(updatedClient))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print());

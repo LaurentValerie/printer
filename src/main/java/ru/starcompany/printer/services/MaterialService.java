@@ -34,6 +34,10 @@ public class MaterialService {
                 .collect(Collectors.toSet());
     }
 
+    public void deleteMaterial(Long id) {
+        materialPersistenceService.deleteMaterial(id);
+    }
+
     private MaterialTypeDto getMaterialTypeDto(Material material) {
         return MaterialTypeDto.builder()
                 .materialType(material.getMaterialType())

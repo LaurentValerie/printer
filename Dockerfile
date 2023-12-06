@@ -10,7 +10,7 @@ COPY settings.gradle .
 COPY src ./src
 
 # Собираем JAR-файл
-RUN gradle build --no-daemon
+RUN gradle bootJar --no-daemon
 
 # Второй этап сборки: создаем контейнер с JDK 17 и копируем собранный JAR
 FROM openjdk:17-jdk-slim
