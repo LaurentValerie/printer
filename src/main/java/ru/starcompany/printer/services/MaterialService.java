@@ -2,10 +2,11 @@ package ru.starcompany.printer.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.starcompany.printer.dto.MaterialTypeDto;
 import ru.starcompany.printer.entities.Material;
 import ru.starcompany.printer.dto.MaterialDto;
-import ru.starcompany.printer.mappers.MaterialMapper;
-import ru.starcompany.printer.mappers.MaterialDtoMapper;
+import ru.starcompany.printer.mappers.Material2MaterialDtoMapper;
+import ru.starcompany.printer.mappers.MaterialDto2MaterialMapper;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,24 +14,31 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class MaterialService {
-    private final MaterialMapper materialMapper;
-    private final MaterialDtoMapper materialDtoMapper;
+    private final Material2MaterialDtoMapper material2MaterialDtoMapper;
+    private final MaterialDto2MaterialMapper materialDto2MaterialMapper;
     private final MaterialPersistenceService materialPersistenceService;
 
     public MaterialDto postMaterials(MaterialDto materialDto){
-        Material material = materialMapper.toMaterials(materialDto);
-        return materialDtoMapper.toMaterialsDto(materialPersistenceService.saveMaterials(material));
+        Material material = material2MaterialDtoMapper.toMaterials(materialDto);
+        return materialDto2MaterialMapper.toMaterialsDto(materialPersistenceService.saveMaterials(material));
     }
-    public Set<String> getAllMaterialTypes(){
+    public Set<MaterialTypeDto> getAllMaterialTypes(){
         return materialPersistenceService.getAllMaterials().stream()
-                .map(materialDtoMapper::toMaterialsDto)
-                .map(MaterialDto::getMaterialType)
+                .map(this::getMaterialTypeDto)
                 .collect(Collectors.toSet());
     }
     public Set<String> getAllMaterialColourByType(String materialType){
         return materialPersistenceService.getAllMaterialsByType(materialType).stream()
-                .map(materialDtoMapper::toMaterialsDto)
+                .map(materialDto2MaterialMapper::toMaterialsDto)
                 .map(MaterialDto::getMaterialColour)
                 .collect(Collectors.toSet());
     }
+
+    private MaterialTypeDto getMaterialTypeDto(Material material) {
+        return MaterialTypeDto.builder()
+                .materialType(material.getMaterialType())
+                .materialTypeDesc(material.getMaterialTypeDesc())
+                .build();
+    }
+
 }
