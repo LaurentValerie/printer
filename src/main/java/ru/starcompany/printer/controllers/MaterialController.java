@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.starcompany.printer.dto.MaterialDto;
+import ru.starcompany.printer.dto.MaterialTypeDto;
 import ru.starcompany.printer.services.MaterialService;
 
 import java.util.Set;
@@ -22,9 +23,10 @@ public class MaterialController {
     }
 
     @GetMapping("/material/types/all")
-    public ResponseEntity<Set<String>> getAllMaterialTypes(){
+    public ResponseEntity<Set<MaterialTypeDto>> getAllMaterialTypes(){
         return ResponseEntity.ok().body(materialService.getAllMaterialTypes());
     }
+
     @GetMapping("/material/colours/{materialType}")
     public ResponseEntity<Set<String>> getAllMaterialColoursByType(@PathVariable String materialType){
         return ResponseEntity.ok().body(materialService.getAllMaterialColourByType(materialType));

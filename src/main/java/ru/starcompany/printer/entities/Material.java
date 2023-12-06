@@ -16,6 +16,7 @@ public class Material {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String materialType;
+    private String materialTypeDesc;
     private String materialColour;
     private int spools;
     private BigDecimal priceOriginal;

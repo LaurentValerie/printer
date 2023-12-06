@@ -5,6 +5,6 @@ import ru.starcompany.printer.entities.Order;
 import ru.starcompany.printer.dto.OrderDto;
 
 @Mapper(componentModel = "spring")
-public interface OrderDtoMapper {
+public interface OrderDto2OrderMapper {
     OrderDto toOrderDto(Order order);
 }

@@ -10,6 +10,7 @@ public class MaterialDto {
     private long id;
     @NotEmpty
     private String materialType;
+    private String materialTypeDesc;
     @NotEmpty
     private String materialColour;
     @NotNull
