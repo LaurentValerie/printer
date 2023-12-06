@@ -1,14 +1,15 @@
 package ru.starcompany.printer.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
 public class OrderDto {
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private long id;
     @NotEmpty
     private String clientUuid;
