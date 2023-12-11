@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import ru.starcompany.printer.PrinterApplicationTests;
-import ru.starcompany.printer.dto.OrderDto;
+import ru.starcompany.printer.dto.NewOrderDto;
 import ru.starcompany.printer.entities.Order;
 import ru.starcompany.printer.repositories.OrderRepository;
 
@@ -35,11 +35,11 @@ public class OrderControllerIntegrationTest extends PrinterApplicationTests {
     @DisplayName("POST api/order/new создание заказа")
     public void successfullyCreateOrderTest() throws Exception {
         // given
-        OrderDto orderDto = createOrderDto();
+        NewOrderDto newOrderDto = createOrderDto();
 
         // when
         ResultActions resultActions = mockMvc.perform(post("/api/order/new")
-                        .content(mapper.writeValueAsString(orderDto))
+                        .content(mapper.writeValueAsString(newOrderDto))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print());
 
@@ -48,11 +48,11 @@ public class OrderControllerIntegrationTest extends PrinterApplicationTests {
 
         List<Order> orders = orderRepository.findAll();
         assertEquals(1, orders.size(), "Must be only one order");
-        assertOrders(orderDto, orders.get(0));
+        assertOrders(newOrderDto, orders.get(0));
     }
 
-    private OrderDto createOrderDto() {
-        return OrderDto.builder()
+    private NewOrderDto createOrderDto() {
+        return NewOrderDto.builder()
                 .clientUuid("TEST_SALLICH")
                 .executorUuid("TEST_SAMDEN28")
                 .quantity(1)
@@ -62,13 +62,13 @@ public class OrderControllerIntegrationTest extends PrinterApplicationTests {
                 .build();
     }
 
-    private void assertOrders(OrderDto orderDto, Order order) {
-        assertEquals(orderDto.getClientUuid(),order.getClientUuid());
-        assertEquals(orderDto.getExecutorUuid(),order.getExecutorUuid());
-        assertEquals(orderDto.getQuantity(),order.getQuantity());
-        assertEquals(orderDto.getPlasticType(),order.getPlasticType());
-        assertEquals(orderDto.getPlasticColour(),order.getPlasticColour());
-        assertEquals(orderDto.getInformation(), order.getInformation());
+    private void assertOrders(NewOrderDto newOrderDto, Order order) {
+        assertEquals(newOrderDto.getClientUuid(),order.getClientUuid());
+        assertEquals(newOrderDto.getExecutorUuid(),order.getExecutorUuid());
+        assertEquals(newOrderDto.getQuantity(),order.getQuantity());
+        assertEquals(newOrderDto.getPlasticType(),order.getPlasticType());
+        assertEquals(newOrderDto.getPlasticColour(),order.getPlasticColour());
+        assertEquals(newOrderDto.getInformation(), order.getInformation());
     }
 
 }

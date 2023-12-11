@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -15,8 +17,14 @@ public class Order {
     private long id;
     private String clientUuid;
     private String executorUuid;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
     private Integer quantity;
     private String plasticType;
     private String plasticColour;
     private String information;
+    private Long printingTime;
+    private BigDecimal plasticWeight;
+    private BigDecimal calcWeight;
+    private BigDecimal threadLength;
 }
