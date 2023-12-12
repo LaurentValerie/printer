@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class OrderDto {
+public class NewOrderDto {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private long id;
     @NotEmpty

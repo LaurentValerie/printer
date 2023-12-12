@@ -2,24 +2,54 @@ package ru.starcompany.printer.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.starcompany.printer.dto.OrderDto;
+import ru.starcompany.printer.dto.ActiveOrderDto;
+import ru.starcompany.printer.dto.NewOrderDto;
 import ru.starcompany.printer.entities.Order;
-import ru.starcompany.printer.mappers.Order2OrderDtoMapper;
-import ru.starcompany.printer.controllers.WebClientController;
-import ru.starcompany.printer.mappers.OrderDto2OrderMapper;
+import ru.starcompany.printer.entities.OrderStatus;
+import ru.starcompany.printer.mappers.ActiveOrderMapper;
+import ru.starcompany.printer.mappers.NewOrderMapper;
 
-@RequiredArgsConstructor
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
+@RequiredArgsConstructor
 public class OrderService {
-    private final Order2OrderDtoMapper order2OrderDtoMapper;
-    private final OrderDto2OrderMapper orderDto2OrderMapper;
+    private final NewOrderMapper newOrderMapper;
+    private final ActiveOrderMapper activeOrderMapper;
     private final OrderPersistenceService orderPersistenceService;
-    private final WebClientController webClientController;
 
-    public OrderDto postOrder(OrderDto orderDto){
-        Order savedOrder = orderPersistenceService.saveOrder(order2OrderDtoMapper.toOrder(orderDto));
-        // TODO fix after complete front end
-//        webClientController.sendToExecutor(orderDto);
-        return orderDto2OrderMapper.toOrderDto(savedOrder);
+    public long saveNewOrder(NewOrderDto newOrderDto){
+        Order newOrder = newOrderMapper.toOrder(newOrderDto);
+        newOrder.setOrderStatus(OrderStatus.NEW);
+        return orderPersistenceService.saveOrder(newOrder);
     }
+
+    public List<NewOrderDto> getAllNewOrdersForExecutor(String executorUuid) {
+        return orderPersistenceService.getAllNewOrdersForExecutor(executorUuid)
+                .stream()
+                .map(newOrderMapper::toOrderDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<ActiveOrderDto> getAllActiveOrdersForExecutor(String executorUuid) {
+        return orderPersistenceService.getAllActiveOrdersForExecutor(executorUuid)
+                .stream()
+                .map(activeOrderMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public long activateOrder(ActiveOrderDto activeOrderDto) {
+        Order orderForUpdate = orderPersistenceService.getById(activeOrderDto.getId());
+        Order updatedOrder = activeOrderMapper.partialUpdate(activeOrderDto, orderForUpdate);
+        updatedOrder.setOrderStatus(OrderStatus.ACTIVE);
+        return orderPersistenceService.saveOrder(updatedOrder);
+    }
+
+    public void finishOrder(Long orderId) {
+        Order order = orderPersistenceService.getById(orderId);
+        order.setOrderStatus(OrderStatus.DONE);
+        orderPersistenceService.saveOrder(order);
+    }
+
 }

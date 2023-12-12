@@ -6,7 +6,10 @@ import ru.starcompany.printer.entities.Client;
 import ru.starcompany.printer.dto.ClientDto;
 
 @Mapper(componentModel = "spring")
-public interface ClientDto2ClientMapper {
+public interface ClientMapper {
+    @Mapping(target = "uuid", source = "telegram")
+    Client toClient(ClientDto clientDto);
+
     @Mapping(target = "telegram", source = "uuid")
     ClientDto toClientDto(Client client);
 }
